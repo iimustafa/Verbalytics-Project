@@ -1,4 +1,5 @@
 Verbalytics: The NLP Hub 🚀
+
 Project Overview
 Verbalytics is a modular web application designed to demonstrate fundamental Natural Language Processing (NLP) tasks. It provides a user-friendly interface to analyze text for Named Entity Recognition (NER) 🏷️, Part-of-Speech (POS) Tagging 📚, TF-IDF insights 📊, and Sentiment Analysis 😊. The project is built with a Python Flask backend and a modern HTML/CSS/JavaScript frontend, featuring an adaptive light/dark theme 🌗.
 
@@ -28,7 +29,7 @@ TensorFlow & Keras: For building and training the LSTM sentiment model. 🧠
 
 Frontend:
 
-HTML5  Markup 📄
+HTML5 Markup 📄
 
 CSS3 Styling (with Tailwind CSS for utility-first styling) 🎨
 
@@ -62,10 +63,12 @@ Verbalytics/
 Setup Instructions ⚙️
 Follow these steps to get Verbalytics up and running on your local machine:
 
-1. Clone the Repository ⬇️
+1. Download the Project ⬇️
 
-git clone <your-repository-url>
-cd Verbalytics # Or whatever your renamed folder is
+You can download this project by cloning the Git repository:
+
+git clone https://github.com/your-username/Verbalytics.git # Replace with your actual repository URL
+cd Verbalytics
 
 2. Create and Activate a Virtual Environment 🐍
 
