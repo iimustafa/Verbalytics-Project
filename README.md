@@ -145,10 +145,6 @@ Check out a quick demo of Verbalytics in action!
 [![Verbalytics Demo](https://img.youtube.com/vi/TwXtaj8lykU/0.jpg)](https://www.youtube.com/watch?v=TwXtaj8lykU)
 
 
-## Contributing 🤝
-
-Feel free to fork the repository, open issues, or submit pull requests. 💖
-
 ## Credits & Acknowledgements 🙏
 
 * Developed by **Mustafa Al Ali**. 🧑‍💻
