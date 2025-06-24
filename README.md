@@ -138,6 +138,31 @@ The application will typically be accessible at `http://127.0.0.1:5000/` in your
 
 6.  Use the theme toggle button in the header to switch between light and dark modes. Your preference will be saved locally.
 
+## Screenshots 📸
+
+Here are some screenshots showcasing the Verbalytics web interface and its features:
+
+### Welcome Page - Dark Mode
+![Welcome Page - Dark Mode](static/screenshots/HomePage-Dark.png)
+
+### Welcome Page - Light Mode
+![Welcome Page - Light Mode](static/screenshots/HomePage-Light.png)
+
+### Named Entity Recognition (NER) Page
+![Named Entity Recognition Page](static/screenshots/Name-Entity-Recognition.png)
+
+### Part-of-Speech (POS) Tagging Page
+![Part of Speech Page](static/screenshots/Part-of-Speech.png)
+
+### TF-IDF Analysis Page 1
+![TF-IDF Analysis Page 1](static/screenshots/TF-IDF-1.png)
+
+### TF-IDF Analysis Page 2
+![TF-IDF Analysis Page 2](static/screenshots/TF-IDF-2.png)
+
+### Sentiment Analysis Page
+![Sentiment Analysis Page](static/screenshots/Sentiment-Analysis.png)
+
 ## Project Demo Video 🎬
 
 Check out a quick demo of Verbalytics in action!
