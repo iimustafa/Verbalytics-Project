@@ -1,0 +1,380 @@
+<!-- templates/tfidf.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TF-IDF Analyzer</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables for Theming */
+        :root {
+            /* Dark Theme Defaults */
+            --bg-body: #1a202c;
+            --bg-header: #2d3748;
+            --bg-card: #2d3748;
+            --bg-input: #1a202c;
+            --border-color: #4a5568;
+            --text-primary: #e2e8f0;
+            --text-secondary: #cbd5e0;
+            --text-tertiary: #a0aec0;
+            --accent-purple: #8b5cf6;
+            --accent-indigo: #6366f1;
+            --shadow-light: rgba(0, 0, 0, 0.15);
+            --shadow-dark: rgba(0, 0, 0, 0.2);
+            --shadow-button: rgba(139, 92, 246, 0.3);
+            --shadow-button-hover: rgba(139, 92, 246, 0.4);
+            --gradient-start: #8b5cf6;
+            --gradient-end: #6366f1;
+            --gradient-hover-start: #7c3aed;
+            --gradient-hover-end: #4f46e5;
+            --card-hover-border: #8b5cf6;
+            --back-button-bg: #4a5568;
+            --back-button-hover-bg: #64748b;
+        }
+
+        /* Light Theme Overrides */
+        body[data-theme='light'] {
+            --bg-body: #f7fafc;
+            --bg-header: #ffffff;
+            --bg-card: #ffffff;
+            --bg-input: #edf2f7;
+            --border-color: #e2e8f0;
+            --text-primary: #2d3748;
+            --text-secondary: #4a5568;
+            --text-tertiary: #718096;
+            --accent-purple: #7c3aed;
+            --accent-indigo: #4f46e5;
+            --shadow-light: rgba(0, 0, 0, 0.05);
+            --shadow-dark: rgba(0, 0, 0, 0.1);
+            --shadow-button: rgba(99, 102, 241, 0.2);
+            --shadow-button-hover: rgba(99, 102, 241, 0.3);
+            --gradient-start: #6366f1;
+            --gradient-end: #8b5cf6;
+            --gradient-hover-start: #4f46e5;
+            --gradient-hover-end: #7c3aed;
+            --card-hover-border: #4f46e5;
+            --back-button-bg: #cbd5e0;
+            --back-button-hover-bg: #a0aec0;
+        }
+
+        /* Apply variables */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-secondary);
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .container-xl {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .header-section {
+            text-align: center;
+            padding: 2rem 0;
+            background-color: var(--bg-header);
+            border-radius: 16px;
+            box-shadow: 0 12px 24px var(--shadow-dark);
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+            position: relative; /* For theme toggle button positioning */
+        }
+        .header-section h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            line-height: 1.1;
+        }
+        .header-section p {
+            font-size: 1.25rem;
+            font-weight: 400;
+            color: var(--text-tertiary);
+            margin-top: 0.75rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .theme-toggle-button {
+            position: absolute;
+            top: 1.5rem;
+            right: 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-primary);
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+        .theme-toggle-button:hover {
+            background-color: var(--border-color);
+        }
+        .theme-toggle-button svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .main-content-card {
+            background-color: var(--bg-card);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 16px var(--shadow-light);
+            margin-bottom: 3rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            font-size: 1.125rem;
+            color: var(--text-primary);
+        }
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-input);
+            color: var(--text-primary);
+            border-radius: 12px;
+            resize: vertical;
+            min-height: 120px;
+            font-size: 1rem;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-purple);
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.3);
+        }
+        .submit-button {
+            display: block;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.125rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 12px var(--shadow-button);
+            letter-spacing: 0.025em;
+            margin-top: 1.5rem;
+        }
+        .submit-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px var(--shadow-button-hover);
+            background: linear-gradient(to right, var(--gradient-hover-start), var(--gradient-hover-end));
+        }
+        .submit-button:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 8px rgba(139, 92, 246, 0.2);
+        }
+
+        .output-section {
+            margin-top: 2rem;
+            background-color: var(--bg-body);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .output-section p.description {
+            font-size: 1rem;
+            color: var(--text-tertiary);
+            margin-bottom: 1rem;
+        }
+        .output-section h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 1rem 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+        th {
+            background-color: var(--border-color);
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+        th:first-child { border-top-left-radius: 8px; }
+        th:last-child { border-top-right-radius: 8px; border-right: none;}
+        td:last-child { border-right: none; }
+        tr:last-child td { border-bottom: none; }
+        tr:nth-child(even) {
+            background-color: var(--bg-card);
+        }
+        tr:nth-child(odd) {
+            background-color: var(--bg-body);
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--back-button-bg);
+            color: var(--text-primary);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+            margin-top: 1.5rem;
+        }
+        .back-button:hover {
+            background-color: var(--back-button-hover-bg);
+        }
+        .back-button svg {
+            margin-right: 0.5rem;
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+</head>
+<body data-theme="{{ theme }}">
+    <div class="container-xl">
+        <header class="header-section">
+            <button id="themeToggle" class="theme-toggle-button" aria-label="Toggle theme">
+                <!-- Sun icon for Light theme, Moon icon for Dark theme -->
+                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707.707M6.343 6.343l-.707-.707m12.728 0l-.707-.707M6.343 17.657l-.707.707M16.5 12a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0z" />
+                </svg>
+                <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0112 21.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.754 9.754 0 0012 2.25c2.31 0 4.47.655 6.362 1.762A9.707 9.707 0 0121.752 15.002z" />
+                </svg>
+            </button>
+
+            <h1>TF-IDF Insights</h1>
+            <p>Determines the importance of words in your document relative to a larger corpus (football news).</p>
+        </header>
+
+        <div class="main-content-card">
+            <form action="/analyze_tfidf" method="POST" class="space-y-6">
+                <div class="form-group">
+                    <label for="tfidf_text_input">Enter text for TF-IDF analysis:</label>
+                    <textarea id="tfidf_text_input" name="text_input" rows="7"
+                              placeholder="E.g., 'Messi scored two goals in the football match. The football team played very well.'"
+                              class="focus:ring-purple-500 focus:border-purple-500">{% if tfidf_input %}{{ tfidf_input }}{% endif %}</textarea>
+                </div>
+                <button type="submit" class="submit-button">Run</button>
+            </form>
+
+            <div class="output-section">
+                <h4>Term Frequencies (TF) in Input:</h4>
+                <p class="description">How often each word appears in *your* sentence.</p>
+                {% if tf_results %}
+                    <div class="mb-6">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Word</th>
+                                    <th>Frequency (TF)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for word, tf in tf_results.items() %}
+                                    <tr>
+                                        <td>{{ word }}</td>
+                                        <td>{{ "%.4f" | format(tf) }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <p class="text-gray-500 mb-4">No words found for TF calculation, or analysis not yet performed.</p>
+                {% endif %}
+
+                <h4 class="mt-6">TF-IDF Scores:</h4>
+                <p class="description">A higher score means the word is more significant in your text compared to the football news corpus.</p>
+                {% if relevant_tfidf_scores %}
+                    <div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Word</th>
+                                    <th>TF-IDF Score</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for word, score in relevant_tfidf_scores.items() %}
+                                    <tr>
+                                        <td>{{ word }}</td>
+                                        <td>{{ "%.4f" | format(score) }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <p class="text-gray-500">No relevant TF-IDF scores, or analysis not yet performed.</p>
+                {% endif %}
+            </div>
+
+            <a href="/" class="back-button">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                </svg>
+                Back
+            </a>
+        </div>
+    </div>
+    <script>
+        // Theme toggle logic - replicated for each page
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const body = document.body;
+        const sunIcon = themeToggleBtn.querySelector('.sun-icon');
+        const moonIcon = themeToggleBtn.querySelector('.moon-icon');
+
+        function setTheme(theme) {
+            body.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            if (theme === 'dark') {
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'inline-block';
+            } else {
+                sunIcon.style.display = 'inline-block';
+                moonIcon.style.display = 'none';
+            }
+        }
+
+        // Initialize theme on page load from localStorage
+        const storedTheme = localStorage.getItem('theme');
+        if (storedTheme) {
+            setTheme(storedTheme);
+        } else {
+            setTheme('dark'); // Default theme
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        });
+    </script>
+</body>
+</html>

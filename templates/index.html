@@ -1,0 +1,327 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NLP Analyzer Hub</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables for Theming */
+        :root {
+            /* Dark Theme Defaults */
+            --bg-body: #1a202c;
+            --bg-header: #2d3748;
+            --bg-card: #2d3748;
+            --bg-input: #1a202c;
+            --border-color: #4a5568;
+            --text-primary: #e2e8f0;
+            --text-secondary: #cbd5e0;
+            --text-tertiary: #a0aec0;
+            --accent-purple: #8b5cf6;
+            --accent-indigo: #6366f1;
+            --shadow-light: rgba(0, 0, 0, 0.15);
+            --shadow-dark: rgba(0, 0, 0, 0.2);
+            --shadow-button: rgba(139, 92, 246, 0.3);
+            --shadow-button-hover: rgba(139, 92, 246, 0.4);
+            --gradient-start: #8b5cf6;
+            --gradient-end: #6366f1;
+            --gradient-hover-start: #7c3aed;
+            --gradient-hover-end: #4f46e5;
+            --card-hover-border: #8b5cf6;
+            --back-button-bg: #4a5568;
+            --back-button-hover-bg: #64748b;
+
+            /* Logo filter for dark theme (making dark parts light) */
+            --logo-filter-dark-mode: brightness(1.8) contrast(1.2); /* Adjust values as needed */
+            /* Invert filter can also be tried: filter: invert(0.8) hue-rotate(180deg) brightness(1.2) contrast(1.2); */
+        }
+
+        /* Light Theme Overrides */
+        body[data-theme='light'] {
+            --bg-body: #f7fafc; /* Light background */
+            --bg-header: #ffffff;
+            --bg-card: #ffffff;
+            --bg-input: #edf2f7; /* Lighter input background */
+            --border-color: #e2e8f0;
+            --text-primary: #2d3748; /* Dark text */
+            --text-secondary: #4a5568;
+            --text-tertiary: #718096;
+            --accent-purple: #7c3aed; /* Slightly darker purple for contrast */
+            --accent-indigo: #4f46e5; /* Slightly darker indigo for contrast */
+            --shadow-light: rgba(0, 0, 0, 0.05);
+            --shadow-dark: rgba(0, 0, 0, 0.1);
+            --shadow-button: rgba(99, 102, 241, 0.2);
+            --shadow-button-hover: rgba(99, 102, 241, 0.3);
+            --gradient-start: #6366f1; /* Changed order for light theme button */
+            --gradient-end: #8b5cf6;
+            --gradient-hover-start: #4f46e5;
+            --gradient-hover-end: #7c3aed;
+            --card-hover-border: #4f46e5; /* Light theme specific hover border */
+            --back-button-bg: #cbd5e0;
+            --back-button-hover-bg: #a0aec0;
+
+            /* Logo filter for light theme (no significant change, keep original) */
+            --logo-filter-light-mode: none;
+        }
+
+        /* Apply variables */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-secondary);
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth theme transition */
+        }
+        .container-xl {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .header-section {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            background-color: var(--bg-header);
+            border-radius: 16px;
+            box-shadow: 0 12px 24px var(--shadow-dark);
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+            position: relative; /* For theme toggle button positioning */
+            display: flex; /* Flexbox for logo and text alignment */
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .header-section h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            line-height: 1.1;
+            margin-top: 1rem; /* Space between logo and title */
+        }
+        .header-section p {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--text-tertiary);
+            margin-top: 1rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .theme-toggle-button {
+            position: absolute;
+            top: 1.5rem;
+            right: 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-primary); /* Icon color */
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+        .theme-toggle-button:hover {
+            background-color: var(--border-color); /* Subtle hover effect */
+        }
+        .theme-toggle-button svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .header-logo {
+            max-width: 250px; /* Adjust size as needed */
+            height: auto;
+            margin-bottom: 1rem; /* Space below logo */
+            transition: filter 0.3s ease; /* Smooth filter transition */
+        }
+
+        /* Apply logo filters based on theme */
+        body[data-theme='dark'] .header-logo {
+            filter: var(--logo-filter-dark-mode);
+        }
+        body[data-theme='light'] .header-logo {
+            filter: var(--logo-filter-light-mode);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding-bottom: 4rem;
+        }
+        .feature-card {
+            background-color: var(--bg-card);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 20px var(--shadow-light);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px var(--shadow-dark);
+            border-color: var(--card-hover-border);
+        }
+        .feature-card h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .feature-card h3 svg {
+            width: 32px;
+            height: 32px;
+            color: var(--accent-purple);
+        }
+        .feature-card p {
+            font-size: 1.1rem;
+            color: var(--text-tertiary);
+            margin-bottom: 2rem;
+            flex-grow: 1;
+        }
+        .feature-card .cta-button {
+            display: inline-block;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.125rem;
+            font-weight: 700;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px var(--shadow-button);
+        }
+        .feature-card .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px var(--shadow-button-hover);
+            background: linear-gradient(to right, var(--gradient-hover-start), var(--gradient-hover-end));
+        }
+    </style>
+</head>
+<body data-theme="{{ theme }}">
+    <div class="container-xl">
+        <header class="header-section">
+            <button id="themeToggle" class="theme-toggle-button" aria-label="Toggle theme">
+                <!-- Sun icon for Light theme, Moon icon for Dark theme -->
+                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707.707M6.343 6.343l-.707-.707m12.728 0l-.707-.707M6.343 17.657l-.707.707M16.5 12a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0z" />
+                </svg>
+                <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0112 21.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.754 9.754 0 0012 2.25c2.31 0 4.47.655 6.362 1.762A9.707 9.707 0 0121.752 15.002z" />
+                </svg>
+            </button>
+
+            <!-- Logo added here -->
+            <img src="{{ url_for('static', filename='logo-h.png') }}" alt="Tuwaiq Academy Logo" class="header-logo">
+            
+            <h1 class="text-6xl font-extrabold tracking-tight">Verbalytics</h1>
+            <p class="text-2xl font-light">
+                Explore powerful Natural Language Processing tools with a click.
+            </p>
+        </header>
+
+        <div class="features-grid">
+            <!-- Named Entity Recognition Card -->
+            <div class="feature-card">
+                <h3>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9.75 9.75m0 0a2.25 2.25 0 100-4.5m0 4.5a2.25 2.25 0 010 4.5m0-4.5H12m2.25 0h3.623M4.74 6.708V4.25m0 2.458a2.25 2.25 0 100 4.5M4.74 6.708H2.25C1.007 6.708 0 5.701 0 4.458V2.25C0 1.007 1.007 0 2.25 0h2.49v2.458m0 2.25a2.25 2.25 0 010 4.5" />
+                    </svg>
+                    Named Entity Recognition (NER)
+                </h3>
+                <p>Identifies and categorizes key information like people, organizations, and locations in your text.</p>
+                <a href="/ner" class="cta-button">Go to NER Analyzer</a>
+            </div>
+
+            <!-- Part-of-Speech Tagging Card -->
+            <div class="feature-card">
+                <h3>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 3c-.966 0-1.898.17-2.757.49A3.375 3.375 0 009 5.25c0 1.224 1.085 2.25 2.518 2.296L12 7.5a.75.75 0 000-1.5zM12 10.5a.75.75 0 110-1.5.75.75 0 010 1.5zM12 13.5c.966 0 1.898-.17 2.757-.49A3.375 3.375 0 0015 11.25c0-1.224-1.085-2.25-2.518-2.296L12 9a.75.75 0 000 1.5zM12 16.5a.75.75 0 110-1.5.75.75 0 010 1.5zM12 19.5c-.966 0-1.898.17-2.757.49A3.375 3.375 0 009 21.75c0 1.224 1.085 2.25 2.518 2.296L12 22.5a.75.75 0 000-1.5z" />
+                    </svg>
+                    Part-of-Speech (POS) Tagging
+                </h3>
+                <p>Analyzes the grammatical role of each word in a sentence (e.g., noun, verb, adjective).</p>
+                <a href="/pos" class="cta-button">Go to POS Tagger</a>
+            </div>
+
+            <!-- TF-IDF Analysis Card -->
+            <div class="feature-card">
+                <h3>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 14.25V4.5m9.75 11.25-3.003 3.003a3 3 0 01-4.242 0 3 3 0 010-4.242l3.003-3.003m9.75 11.25l-3.003-3.003a3 3 0 01-4.242 0 3 3 0 010-4.242l3.003-3.003m-9.75 11.25L7.5 14.25" />
+                    </svg>
+                    TF-IDF Insights
+                </h3>
+                <p>Determines the importance of words in your document relative to a larger corpus (football news).</p>
+                <a href="/tfidf" class="cta-button">Go to TF-IDF Analyzer</a>
+            </div>
+
+            <!-- Sentiment Analysis Card -->
+            <div class="feature-card">
+                <h3>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.182 15.182a4.5 4.5 0 01-6.364-6.364M12 20.25c4.97 0 9-4.03 9-9S16.97 2.25 12 2.25 3 6.28 3 11.25s4.03 9 9 9z" />
+                    </svg>
+                    Sentiment Analysis
+                </h3>
+                <p>Identifies the emotional tone (positive, negative, neutral) of your text.</p>
+                <a href="/sentiment" class="cta-button">Go to Sentiment Analyzer</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const body = document.body;
+        const sunIcon = themeToggleBtn.querySelector('.sun-icon');
+        const moonIcon = themeToggleBtn.querySelector('.moon-icon');
+
+        // Function to set theme
+        function setTheme(theme) {
+            body.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme); // Save preference in localStorage
+            // Update icons based on theme
+            if (theme === 'dark') {
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'inline-block';
+            } else {
+                sunIcon.style.display = 'inline-block';
+                moonIcon.style.display = 'none';
+            }
+            // Removed the fetch call to /set_theme as it was causing URL errors in the environment.
+            // Theme preference will now be handled client-side via localStorage.
+        }
+
+        // Initialize theme on page load
+        const storedTheme = localStorage.getItem('theme');
+        if (storedTheme) {
+            setTheme(storedTheme);
+        } else {
+            // Default to dark theme if no preference is stored
+            setTheme('dark');
+        }
+
+        // Toggle theme on button click
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        });
+    </script>
+</body>
+</html>
