@@ -92,10 +92,10 @@ source venv/bin/activate  # On macOS/Linux
 
 ### 3. Install Dependencies 📦
 
-Install all required Python packages.
+Install all required Python packages from `requirements.txt`.
 
 ```bash
-pip install Flask spacy scikit-learn tensorflow pandas
+pip install -r requirements.txt
 ```
 
 ### 4. Download SpaCy English Model 🌐
