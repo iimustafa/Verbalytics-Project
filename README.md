@@ -139,7 +139,7 @@ The application will typically be accessible at `http://127.0.0.1:5000/` in your
 6.  Use the theme toggle button in the header to switch between light and dark modes. Your preference will be saved locally.
 
 ## Model Architecture Diagram 🧠🌐
-![Model Architecture Diagram](static/screenshots/Verbalytics - Model Diagram.png)
+![Model Architecture Diagram](static/screenshots/Verbalytics-Model-Diagram.png)
 
 ## Screenshots 📸
 
