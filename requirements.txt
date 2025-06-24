@@ -1,0 +1,10 @@
+Flask
+transformers
+torch
+sentencepiece
+accelerate
+pandas
+numpy
+scikit-learn
+spacy
+nltk
