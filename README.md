@@ -166,9 +166,7 @@ Here are some screenshots showcasing the Verbalytics web interface and its featu
 ### Sentiment Analysis Page
 ![Sentiment Analysis Page](static/screenshots/Sentiment-Analysis.png)
 
-## Project Demo Video 🎬
-
-Check out a quick demo of Verbalytics in action!
+## Verbalytics in A Minute! 🎬
 
 [![Verbalytics Demo](https://img.youtube.com/vi/TwXtaj8lykU/0.jpg)](https://www.youtube.com/watch?v=TwXtaj8lykU)
 
