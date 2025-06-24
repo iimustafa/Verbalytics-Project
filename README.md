@@ -1,43 +1,48 @@
-Verbalytics: The NLP Hub 🚀
+# Verbalytics: The NLP Hub 🚀
 
-Project Overview
+## Project Overview
+
 Verbalytics is a modular web application designed to demonstrate fundamental Natural Language Processing (NLP) tasks. It provides a user-friendly interface to analyze text for Named Entity Recognition (NER) 🏷️, Part-of-Speech (POS) Tagging 📚, TF-IDF insights 📊, and Sentiment Analysis 😊. The project is built with a Python Flask backend and a modern HTML/CSS/JavaScript frontend, featuring an adaptive light/dark theme 🌗.
 
-Features ✨
-Named Entity Recognition (NER): Identify and classify named entities (e.g., persons 🧑‍🤝‍🧑, organizations 🏢, locations 📍, dates 📅) in input text.
+## Features ✨
 
-Part-of-Speech (POS) Tagging: Determine the grammatical category (e.g., noun, verb, adjective) of each word in a sentence 📝.
+* **Named Entity Recognition (NER):** Identify and classify named entities (e.g., persons 🧑‍🤝‍🧑, organizations 🏢, locations 📍, dates 📅) in input text.
 
-TF-IDF Insights: Calculate Term Frequency (TF) and TF-IDF scores to highlight the importance of words in a document relative to a specified corpus (football news) ⚽.
+* **Part-of-Speech (POS) Tagging:** Determine the grammatical category (e.g., noun, verb, adjective) of each word in a sentence 📝.
 
-Sentiment Analysis: Classify the emotional tone of text as Positive 😄, Negative 😠, or Neutral 😐 using a deep learning (LSTM) model.
+* **TF-IDF Insights:** Calculate Term Frequency (TF) and TF-IDF scores to highlight the importance of words in a document relative to a specified corpus (football news) ⚽.
 
-Adaptive Theme: Seamlessly switch between light and dark modes ☀️🌙, with preference saved in your browser.
+* **Sentiment Analysis:** Classify the emotional tone of text as Positive 😄, Negative 😠, or Neutral 😐 using a deep learning (LSTM) model.
 
-Modular Design: Separate pages and backend routes for each NLP function, ensuring a clean and scalable architecture 🏗️.
+* **Adaptive Theme:** Seamlessly switch between light and dark modes ☀️🌙, with preference saved in your browser.
 
-Technologies Used 🛠️
-Backend: Python 3 🐍, Flask 🌐
+* **Modular Design:** Separate pages and backend routes for each NLP function, ensuring a clean and scalable architecture 🏗️.
 
-NLP Libraries:
+## Technologies Used 🛠️
 
-spaCy: For efficient NER and POS tagging. 🧠
+* **Backend:** Python 3 🐍, Flask 🌐
 
-Scikit-learn: For TfidfVectorizer. 🔬
+* **NLP Libraries:**
 
-TensorFlow & Keras: For building and training the LSTM sentiment model. 🧠
+    * [spaCy](https://spacy.io/): For efficient NER and POS tagging. 🧠
 
-Frontend:
+    * [Scikit-learn](https://scikit-learn.org/): For `TfidfVectorizer`. 🔬
 
-HTML5 Markup 📄
+    * [TensorFlow](https://www.tensorflow.org/) & [Keras](https://keras.io/): For building and training the LSTM sentiment model. 🧠
 
-CSS3 Styling (with Tailwind CSS for utility-first styling) 🎨
+* **Frontend:**
 
-JavaScript interactivity 💻
+    * HTML5 Markup 📄
 
-Data Handling: Pandas 🐼 (for CSV processing in model creation)
+    * CSS3 Styling (with [Tailwind CSS](https://tailwindcss.com/) for utility-first styling) 🎨
 
-Project Structure 📁
+    * JavaScript interactivity 💻
+
+* **Data Handling:** Pandas 🐼 (for CSV processing in model creation)
+
+## Project Structure 📁
+
+```
 Verbalytics/
 ├── static/
 │   └── logo-h.png          # Project logo (Tuwaiq Academy) 🏞️
@@ -59,74 +64,91 @@ Verbalytics/
 ├── pos.py                  # Module for POS Tagging function 📜
 ├── sentiment.py            # Module for Sentiment Analysis function ❤️
 └── tf_idf.py               # Module for TF-IDF calculation 🔍
+```
 
-Setup Instructions ⚙️
+## Setup Instructions ⚙️
+
 Follow these steps to get Verbalytics up and running on your local machine:
 
-1. Download the Project ⬇️
+### 1. Download the Project ⬇️
 
 You can download this project by cloning the Git repository:
 
-git clone https://github.com/your-username/Verbalytics.git # Replace with your actual repository URL
+```bash
+git clone [https://github.com/your-username/Verbalytics.git](https://github.com/your-username/Verbalytics.git) # Replace with your actual repository URL
 cd Verbalytics
+```
 
-2. Create and Activate a Virtual Environment 🐍
+### 2. Create and Activate a Virtual Environment 🐍
 
 It's highly recommended to use a virtual environment to manage dependencies.
 
+```bash
 python3 -m venv venv
 source venv/bin/activate  # On macOS/Linux
 # venv\Scripts\activate   # On Windows Command Prompt
 # venv\Scripts\Activate.ps1 # On Windows PowerShell
+```
 
-3. Install Dependencies 📦
+### 3. Install Dependencies 📦
 
 Install all required Python packages.
 
+```bash
 pip install Flask spacy scikit-learn tensorflow pandas
+```
 
-4. Download SpaCy English Model 🌐
+### 4. Download SpaCy English Model 🌐
 
-The en_core_web_sm model is essential for NER and POS tagging.
+The `en_core_web_sm` model is essential for NER and POS tagging.
 
+```bash
 python -m spacy download en_core_web_sm
+```
 
-5. Prepare Data and Create NLP Models 📊
+### 5. Prepare Data and Create NLP Models 📊
 
-This script will train and save the tfidf_vectorizer, sentiment_model.keras, and sentiment_tokenizer.json into the models/ directory.
+This script will train and save the `tfidf_vectorizer`, `sentiment_model.keras`, and `sentiment_tokenizer.json` into the `models/` directory.
 
-Note on Sentiment Model Accuracy: The create_model.py script currently trains the sentiment model using cleaned_football_news.csv with randomly generated sentiment labels. For meaningful sentiment analysis, you must provide your own truly human-labeled dataset. Instructions for this are within the create_model.py file.
+**Note on Sentiment Model Accuracy:** The `create_model.py` script currently trains the sentiment model using `cleaned_football_news.csv` with *randomly generated sentiment labels*. For meaningful sentiment analysis, you **must** provide your own truly human-labeled dataset. Instructions for this are within the `create_model.py` file.
 
+```bash
 python create_model.py
+```
 
-6. Run the Flask Application ▶️
+### 6. Run the Flask Application ▶️
 
+```bash
 python app.py
+```
 
-The application will typically be accessible at http://127.0.0.1:5000/ in your web browser. 🌐
+The application will typically be accessible at `http://127.0.0.1:5000/` in your web browser. 🌐
 
-Usage 💡
-Navigate to http://127.0.0.1:5000/ in your web browser.
+## Usage 💡
 
-The welcome page will display cards for each NLP function.
+1.  Navigate to `http://127.0.0.1:5000/` in your web browser.
 
-Click on any card (e.g., "Go to NER Analyzer") to navigate to its dedicated page.
+2.  The welcome page will display cards for each NLP function.
 
-On the function's page, enter your text into the provided textarea and click the "Run Analysis" button.
+3.  Click on any card (e.g., "Go to NER Analyzer") to navigate to its dedicated page.
 
-View the results displayed below the input area.
+4.  On the function's page, enter your text into the provided textarea and click the "Run Analysis" button.
 
-Use the theme toggle button in the header to switch between light and dark modes. Your preference will be saved locally.
+5.  View the results displayed below the input area.
 
-Contributing 🤝
+6.  Use the theme toggle button in the header to switch between light and dark modes. Your preference will be saved locally.
+
+## Contributing 🤝
+
 Feel free to fork the repository, open issues, or submit pull requests. 💖
 
-Credits & Acknowledgements 🙏
-Developed as a project for Tuwaiq Academy. 🎓
+## Credits & Acknowledgements 🙏
 
-Built using open-source libraries: Flask, spaCy, Scikit-learn, TensorFlow, Keras, Pandas, Tailwind CSS. 💻
+* Developed as a project for **Tuwaiq Academy**. 🎓
 
-License 📜
-This project is open-source and available under the MIT License.
-(Note: You'll need to create a LICENSE.md file in your repository if you choose the MIT license.)
+* Built using open-source libraries: Flask, spaCy, Scikit-learn, TensorFlow, Keras, Pandas, Tailwind CSS. 💻
 
+## License 📜
+
+This project is open-source and available under the [MIT License](LICENSE.md).
+(Note: You'll need to create a `LICENSE.md` file in your repository if you choose the MIT license.)
