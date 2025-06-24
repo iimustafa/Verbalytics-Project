@@ -1,4 +1,4 @@
-# Verbalytics: The NLP Hub 🚀
+# V E R B A L Y T I C S 🚀
 
 ## Project Overview
 
