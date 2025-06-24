@@ -138,6 +138,13 @@ The application will typically be accessible at `http://127.0.0.1:5000/` in your
 
 6.  Use the theme toggle button in the header to switch between light and dark modes. Your preference will be saved locally.
 
+## Project Demo Video 🎬
+
+Check out a quick demo of Verbalytics in action!
+
+[![Verbalytics Demo](https://img.youtube.com/vi/TwXtaj8lykU/0.jpg)](https://www.youtube.com/watch?v=TwXtaj8lykU)
+
+
 ## Contributing 🤝
 
 Feel free to fork the repository, open issues, or submit pull requests. 💖
@@ -145,6 +152,6 @@ Feel free to fork the repository, open issues, or submit pull requests. 💖
 ## Credits & Acknowledgements 🙏
 
 * Developed by **Mustafa Al Ali**. 🧑‍💻
-* Developed as a project for **Tuwaiq Academy**. 🎓
+* Developed as a project for **AI Diploma**. 🎓
 
 * Built using open-source libraries: Flask, spaCy, Scikit-learn, TensorFlow, Keras, Pandas, Tailwind CSS. 💻
