@@ -56,7 +56,7 @@ Verbalytics/
 │   ├── tfidf_vectorizer.pkl # Saved TF-IDF model
 │   ├── sentiment_model.keras # Saved Keras sentiment model
 │   └── sentiment_tokenizer.json # Saved tokenizer for sentiment model
-├── cleaned_football_news.csv # Corpus for TF-IDF training 📰
+├── cleaned_football_news.csv # Corpus for TF-IDF training (Source: [Kaggle Football News Articles](https://www.kaggle.com/datasets/hammadjavaid/football-news-articles/data)) 📰
 ├── your_sentiment_labeled_data.csv # Placeholder for your own labeled sentiment data (optional) 📝
 ├── app.py                  # Flask backend application 💻
 ├── create_model.py         # Script to train and save NLP models ✨
@@ -144,11 +144,7 @@ Feel free to fork the repository, open issues, or submit pull requests. 💖
 
 ## Credits & Acknowledgements 🙏
 
+* Developed by **Mustafa Al Ali**. 🧑‍💻
 * Developed as a project for **Tuwaiq Academy**. 🎓
 
 * Built using open-source libraries: Flask, spaCy, Scikit-learn, TensorFlow, Keras, Pandas, Tailwind CSS. 💻
-
-## License 📜
-
-This project is open-source and available under the [MIT License](LICENSE.md).
-(Note: You'll need to create a `LICENSE.md` file in your repository if you choose the MIT license.)
